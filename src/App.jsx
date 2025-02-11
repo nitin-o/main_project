@@ -1,49 +1,46 @@
-import Footer from "./componat/Footer"
-import Header from "./componat/Header"
-import { useEffect, useState } from "react"
+import React from "react";
+import { useState, useEffect } from "react";
+import { Header, LoginForm } from "./componat/indext";
+import authService from "./appwrite/auth";
 import { useDispatch } from "react-redux";
-import authService from "./appwrite/auth"
-import {login, logout} from "./store/authSlice"
-// import { Outlet } from 'react-router-dom'
+import { login,logout } from "./store/authSlice";
+import Login_Card_Page from "./componat/Card/Card";
+
+
+
+
 
 
 function App() {
 
 
+const [loading,setLoading]=useState(false)
+const dispatch = useDispatch()
 
-  const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
+useEffect(() => {
+  authService.getCurrentUser()
+  .then((userData) => {
+    if (userData) {
+      dispatch(login({userData}))
+    }else{
+      dispatch(logout())
+    }
+  })
+  .finally(()=>(setLoading(false)))
 
-  useEffect(() => {
-    authService.getCurrentUser()
-    .then((userData) => {
-      if (userData) {
-        dispatch(login({userData}))
-      }else{
-        dispatch(logout())
-      }
-    })
-    .finally(()=>(setLoading(false)))
-
-  }, [ dispatch]  )
-
+}, [ dispatch]  )
 
 
 
 
-  return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-      <div className='w-full block'>
-        <Header />
-        <main>
-        {/* TODO:  <Outlet /> */}
-        </main>
-        <Footer />
-      </div>
-    </div>
-  ) : null
+
+ return(
+  <>
+
+  
+  </>
+ )
+
 }
 
-
-
-export default App 
+export default App
