@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Header, LoginForm } from "./componat/indext";
+import {  Footer, Header } from "./componat/indext";
 import authService from "./appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login,logout } from "./store/authSlice";
-import Login_Card_Page from "./componat/Card/Card";
+import { Outlet } from "react-router";
+
+
 
 
 
@@ -19,7 +21,9 @@ const dispatch = useDispatch()
 
 useEffect(() => {
   authService.getCurrentUser()
+  
   .then((userData) => {
+    console.log(userData)
     if (userData) {
       dispatch(login({userData}))
     }else{
@@ -34,11 +38,21 @@ useEffect(() => {
 
 
 
- return(
-  <>
 
-  
-  </>
+
+
+
+
+
+
+ return(
+ <>
+   <div className=" w-full h-screen bg-amber-400 ">
+    <Header />
+    <div className=""><Outlet/></div>
+  </div>
+  <Footer/>
+ </>
  )
 
 }

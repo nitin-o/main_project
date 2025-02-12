@@ -1,8 +1,40 @@
 
 import React from "react";
 import { Login_SigUp_Loguot } from "../indext";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
+
+    const authStatus = useSelector((state)=>((state.auth.status)))
+  
+    const naviget = useNavigate()
+
+    const navItems =[
+        {
+            name:"Home" ,
+            url:"/",
+            active:!authStatus
+        },
+        {
+            name:"profile",
+            url:"/profile",
+            active:!authStatus
+        }
+        
+    ]
+
+
+
+
+
+
+
+
+
+
+
+
 
    
     return(<>
@@ -27,19 +59,18 @@ function Header() {
             </button>
         </div>
         <div id="mega-menu" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-                            <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+            <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+                {navItems.map((item)=>(
+                    item.active ? (<li key={item.name}>
+                        <button
+                        onClick={()=>(naviget(item.url))}   
+                        class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">{item.name}</button>
+                    </li>): null
+                ))}
 
-                <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">nitin</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">nana</a>
-                </li>
-                <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">otavkar</a>
-                </li>
                 
-                
+
+
 
             </ul>
         </div>
