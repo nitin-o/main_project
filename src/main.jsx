@@ -7,9 +7,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom' // Make s
 import { Provider } from 'react-redux';
 import store from './store/store'; // Correct the path if needed
 
-import Home from './pages/Home.jsx';
-import LoginForm from './pages/LoginForm.jsx';
-import Sign_up from './pages/Sign_up.jsx';
+
+import SignUp, { SignUp2 } from './pages/Sign_up.jsx';
+import {CreatePost,LoginForm,Home} from "./pages/index.js"
 
 
 
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
-            element: <Home />,
+            element: <Home/>,
         },
         {
           path:"/profile",
@@ -33,7 +33,14 @@ const router = createBrowserRouter([
         },
         {
           path:"/sign_up",
-          element:<Sign_up/>
+          element:<SignUp/>
+        },{
+          path:"/CreatePost",
+          element:<CreatePost/>
+        },{
+          path:`/post`,
+          element:"home"
+
         }
 
 
@@ -52,15 +59,18 @@ const router = createBrowserRouter([
   )
 
 
+  createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <Provider store={store}>
+          <RouterProvider router={router}/>
+        </Provider>
+      </React.StrictMode>,
+    
+    
+    )
+    
 
 
-createRoot(document.getElementById('root')).render(
-<React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}/>
-    </Provider>
-  </React.StrictMode>,
-)
 
 
 

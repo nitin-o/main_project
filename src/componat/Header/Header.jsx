@@ -14,12 +14,17 @@ function Header() {
         {
             name:"Home" ,
             url:"/",
-            active:!authStatus
+            active:true
         },
         {
             name:"profile",
             url:"/profile",
-            active:!authStatus
+            active:authStatus
+        },
+        {
+            name :'CreatePost',
+            url:"/CreatePost",
+            active:authStatus
         }
         
     ]

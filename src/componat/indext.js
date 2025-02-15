@@ -1,7 +1,6 @@
 import Footer from './Footer/Footer';
 import Header from "./Header/Header";
-
-import Login_SigUp_Loguot from "./Header/Card/Login_SigUp_Loguot";
+import Login_SigUp_Loguot from "./Header/HeadeComponet/Login_SigUp_Loguot";
 import LoginForm from "../pages/LoginForm";
 
 export{
