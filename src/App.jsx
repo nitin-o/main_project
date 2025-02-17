@@ -7,6 +7,7 @@ import { login,logout } from "./store/authSlice";
 import { Outlet } from "react-router";
 
 
+
 function App() {
 
 
@@ -15,17 +16,15 @@ const dispatch = useDispatch()
 
 useEffect(() => {
   authService.getCurrentUser()
-  .then((userData) => {
-    console.log(userData)
-    if (userData) {
-      dispatch(login({userData}))
-    }else{
-      dispatch(logout())
-    }
-  })
-  .finally(()=>(setLoading(true)))
-
-}, [ dispatch]  )
+    .then((userData) => {
+      if (userData) {
+        dispatch(login(userData)); // Remove extra object wrapping
+      } else {
+        dispatch(logout());
+      }
+    })
+    .finally(() => setLoading(true)); // Ensure loading is set to false
+}, [dispatch]);
 
  return loading? (
  <>
@@ -37,7 +36,9 @@ useEffect(() => {
     </div>
   
   <Footer/>
+  
  </>
+
  ):( <div className="flex justify-center items-center h-screen bg-gray-900">
   <div className="text-center">
     <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
